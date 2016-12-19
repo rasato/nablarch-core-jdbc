@@ -11,7 +11,15 @@ buildscript {
     
     // サードパーティ製ライブラリの格納リポジトリ
     if(project.hasProperty('nablarchExtRepoUrl')) {
-       maven { url "${nablarchExtRepoUrl}" }
+       maven {
+         if (project.hasProperty('extRepoUserName')) {
+           credentials {
+             username "${extRepoUserName}"
+             password "${extRepoPassword}"
+           }
+         }
+         url "${nablarchExtRepoUrl}"
+       }
      }
 
   }
